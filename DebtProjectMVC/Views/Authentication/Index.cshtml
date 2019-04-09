@@ -1,0 +1,74 @@
+﻿@model DebtProjectMVC.Models.ViewModels.AuthenticationViewModel
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <link href="~/css/site.css" rel="stylesheet" />
+
+    <title>Rejestracja</title>
+</head>
+<body id="AuthenticationPage">
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#" style="margin-right: 25px;">PRYWATNY REJESTR DŁUGÓW</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Home")">Powrót do strony głównej<span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <section class="row">
+                <article class="col-md-6 col-sm-10">
+                    <div class="mx-auto">
+                        @await Html.PartialAsync("_LoginPartial")
+                    </div>
+                </article>
+                <article class="col-md-6 col-sm-10">
+                    <div class="mx-auto">
+                        @await Html.PartialAsync("_RegisterPartial")
+                    </div>
+                </article>
+            </section>
+        </div>
+    }
+    else
+    {
+        <div class="container-fluid">
+            <section class="row">
+                <article class="col-10 container-fluid text-center">
+                    <div>
+                        <div class="mx-auto mb-4 text-center">
+                            <i class="fa fa-user fa-5x"></i>
+                        </div>
+                        <div class="mb-4">
+                            <h3>Zalogowano jako: </h3>
+                            @User.Identity.Name
+                        </div>
+                        <div class="form-group">
+                            <a class="btn btn-warning mr-2" href="@Url.Action("Logout", "Authentication")">Wyloguj</a>
+                            <a class="btn btn-info" href="@Url.Action("Index", "Home")">Powrót do strony głównej</a>
+                        </div>
+                    </div>     
+                </article>
+            </section>
+        </div>
+    }
+</body>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+</html>

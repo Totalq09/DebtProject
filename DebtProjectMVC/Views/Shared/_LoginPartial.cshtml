@@ -1,0 +1,42 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@using DebtProjectMVC.Entities
+@model DebtProjectMVC.Models.ViewModels.AuthenticationViewModel
+@inject SignInManager<IdentityUser> SignInManager
+
+        <section class="container-fluid">
+            <form asp-route-returnUrl="@ViewData["ReturnUrl"]" asp-controller="Authentication" asp-action="Login" method="post">
+                <div class="mx-auto mb-4 text-center">
+                    <i class="fa fa-user-circle-o fa-5x"></i>
+                </div>
+                <h3 class="text-center">Logowanie </h3>
+                <hr />
+                <div class="text-danger font-weight-bold mb-2">
+                    @Html.ValidationMessage("LoginValidationMessage")
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="LoginViewModel.LoginEmail"></label>
+                    <input asp-for="LoginViewModel.LoginEmail" class="form-control" />
+                    <span asp-validation-for="LoginViewModel.LoginEmail" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LoginViewModel.LoginPassword"></label>
+                    <input asp-for="LoginViewModel.LoginPassword" class="form-control" />
+                    <span asp-validation-for="LoginViewModel.LoginPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="LoginViewModel.RememberMe">
+                            <input asp-for="LoginViewModel.RememberMe" />
+                            @Html.DisplayNameFor(m => m.LoginViewModel.RememberMe)
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">Zaloguj</button>
+                </div>
+            </form>
+        </section>
